@@ -18,24 +18,24 @@ public class IntegrationConfiguration {
 
     static final String ADOPTIONS_CHANNEL_NAME = "outboundAdoptionsMessageChannel";
 
-    private static final String ADOPTIONS_NAME = "adoptions";
-    private static final String ADOPTIONS_ROUTING_KEY = "outboundAdoptionsRoutingKey";
-
+    private static final String QUEUE = "adoptions.queue";
+    private static final String EXCHANGE = "adoptions.exchange";
+    private static final String ROUTING_KEY = "adoptions.created";
 
     @Bean
     Queue adoptionsQueue() {
-        return QueueBuilder.durable(ADOPTIONS_NAME).build();
+        return QueueBuilder.durable(QUEUE).build();
     }
 
     @Bean
     Exchange adoptionsExchange() {
-        return ExchangeBuilder.directExchange(ADOPTIONS_NAME).build();
+        return ExchangeBuilder.directExchange(EXCHANGE).build();
     }
 
     @Bean
     Binding adoptionsBinding(Queue adoptionsQueue, Exchange adoptionsExchange) {
 
-        return BindingBuilder.bind(adoptionsQueue).to(adoptionsExchange).with(ADOPTIONS_ROUTING_KEY).noargs();
+        return BindingBuilder.bind(adoptionsQueue).to(adoptionsExchange).with(ROUTING_KEY).noargs();
     }
 
     @Bean(ADOPTIONS_CHANNEL_NAME)
@@ -46,8 +46,8 @@ public class IntegrationConfiguration {
     @Bean
     IntegrationFlow outboundAdoptionsFlow(@Qualifier(ADOPTIONS_CHANNEL_NAME) MessageChannel messageChannel, AmqpTemplate template) {
         AmqpOutboundChannelAdapterSpec spec = Amqp.outboundAdapter(template)
-                .exchangeName(ADOPTIONS_NAME)
-                .routingKey(ADOPTIONS_ROUTING_KEY);
+                .exchangeName(EXCHANGE)
+                .routingKey(ROUTING_KEY);
 
         return IntegrationFlow.from(messageChannel).handle(spec).get();
     }
