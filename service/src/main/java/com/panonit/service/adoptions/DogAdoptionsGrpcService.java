@@ -8,11 +8,11 @@ import io.grpc.stub.StreamObserver;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DogAdoptionsGrpcService extends AdoptionsGrpc.AdoptionsImplBase {
+class DogAdoptionsGrpcService extends AdoptionsGrpc.AdoptionsImplBase {
 
     private final DogAdoptionService service;
 
-    public DogAdoptionsGrpcService(DogAdoptionService service) {
+    DogAdoptionsGrpcService(DogAdoptionService service) {
         this.service = service;
     }
 

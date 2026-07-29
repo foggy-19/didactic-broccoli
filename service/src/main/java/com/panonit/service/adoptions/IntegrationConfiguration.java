@@ -14,7 +14,7 @@ import org.springframework.integration.dsl.MessageChannels;
 import org.springframework.messaging.MessageChannel;
 
 @Configuration
-public class IntegrationConfiguration {
+class IntegrationConfiguration {
 
     static final String ADOPTIONS_CHANNEL_NAME = "outboundAdoptionsMessageChannel";
 

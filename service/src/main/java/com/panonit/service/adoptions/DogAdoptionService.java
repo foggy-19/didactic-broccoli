@@ -15,7 +15,7 @@ class DogAdoptionService {
     private final ChatClient singularity;
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    public DogAdoptionService(DogRepository repository, ChatClient singularity, ApplicationEventPublisher applicationEventPublisher) {
+    DogAdoptionService(DogRepository repository, ChatClient singularity, ApplicationEventPublisher applicationEventPublisher) {
         this.repository = repository;
         this.singularity = singularity;
         this.applicationEventPublisher = applicationEventPublisher;

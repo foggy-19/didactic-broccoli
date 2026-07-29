@@ -6,11 +6,11 @@ import org.springframework.stereotype.Controller;
 import java.util.Collection;
 
 @Controller
-public class DogAdoptionsGraphqlController {
+class DogAdoptionsGraphqlController {
 
     private final DogAdoptionService service;
 
-    public DogAdoptionsGraphqlController(DogAdoptionService service) {
+    DogAdoptionsGraphqlController(DogAdoptionService service) {
         this.service = service;
     }
 
