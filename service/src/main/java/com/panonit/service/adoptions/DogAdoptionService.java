@@ -1,5 +1,6 @@
 package com.panonit.service.adoptions;
 
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,10 +12,12 @@ import java.util.Collection;
 class DogAdoptionService {
 
     private final DogRepository repository;
+    private final ChatClient singularity;
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    public DogAdoptionService(DogRepository repository, ApplicationEventPublisher applicationEventPublisher) {
+    public DogAdoptionService(DogRepository repository, ChatClient singularity, ApplicationEventPublisher applicationEventPublisher) {
         this.repository = repository;
+        this.singularity = singularity;
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
@@ -31,7 +34,7 @@ class DogAdoptionService {
     }
 
     String assistant(String question) {
-        return null; // todo
+        return singularity.prompt(question).call().content();
     }
 }
 
