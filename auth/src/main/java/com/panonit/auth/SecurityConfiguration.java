@@ -26,7 +26,7 @@ public class SecurityConfiguration {
     InMemoryUserDetailsManager inMemoryUserDetailsManager(PasswordEncoder passwordEncoder) {
         var users = Set.of(
                 User.withUsername("admin").password(passwordEncoder.encode("admin")).roles(USER_ROLE).build(),
-                User.withUsername("panonit").password(passwordEncoder.encode("password")).roles(USER_ROLE).build()
+                User.withUsername("panonit").password(passwordEncoder.encode("panonit")).roles(USER_ROLE).build()
         );
         return new InMemoryUserDetailsManager(users);
     }
